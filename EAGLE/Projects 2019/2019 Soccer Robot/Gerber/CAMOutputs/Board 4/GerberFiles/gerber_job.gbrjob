@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2019-05-24T04:17:38Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.3.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "Board 3 Teensy"
+        },
+        "Owner": "Marc Cooke-Russell <marc.cookerussell@gmail.com>",
+        "Size": {
+            "X": 209.935394,
+            "Y": 189.654966
+        }
+    }
+}

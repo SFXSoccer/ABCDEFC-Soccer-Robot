@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.202
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LightSensorArray", "LightSensorArray\LightSensorArray.vcxproj", "{B4BAFE60-1396-458F-977A-23F6D495CF40}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TSOPSensorArray", "TSOPSensorArray\TSOPSensorArray.vcxproj", "{8E8D5F61-656F-4F97-BE24-9B33E1ACEC37}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Robot", "Robot\Robot.vcxitems", "{9FEE10FC-9C2E-44BA-A447-9356CC83D171}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoccerRobot", "SoccerRobot\SoccerRobot.vcxproj", "{C5F80730-F44F-4478-BDAE-6634EFC2CA88}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MotorController", "MotorController\MotorController.vcxproj", "{DF870983-E164-4A0D-9B68-783236DDA195}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Robot\Robot.vcxitems*{9fee10fc-9c2e-44ba-a447-9356cc83d171}*SharedItemsImports = 9
+		Robot\Robot.vcxitems*{c5f80730-f44f-4478-bdae-6634efc2ca88}*SharedItemsImports = 4
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B4BAFE60-1396-458F-977A-23F6D495CF40}.Debug|x86.ActiveCfg = Debug|Win32
+		{B4BAFE60-1396-458F-977A-23F6D495CF40}.Debug|x86.Build.0 = Debug|Win32
+		{B4BAFE60-1396-458F-977A-23F6D495CF40}.Release|x86.ActiveCfg = Release|Win32
+		{B4BAFE60-1396-458F-977A-23F6D495CF40}.Release|x86.Build.0 = Release|Win32
+		{8E8D5F61-656F-4F97-BE24-9B33E1ACEC37}.Debug|x86.ActiveCfg = Debug|Win32
+		{8E8D5F61-656F-4F97-BE24-9B33E1ACEC37}.Debug|x86.Build.0 = Debug|Win32
+		{8E8D5F61-656F-4F97-BE24-9B33E1ACEC37}.Release|x86.ActiveCfg = Release|Win32
+		{8E8D5F61-656F-4F97-BE24-9B33E1ACEC37}.Release|x86.Build.0 = Release|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.ActiveCfg = Debug|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Debug|x86.Build.0 = Debug|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.ActiveCfg = Release|Win32
+		{C5F80730-F44F-4478-BDAE-6634EFC2CA88}.Release|x86.Build.0 = Release|Win32
+		{DF870983-E164-4A0D-9B68-783236DDA195}.Debug|x86.ActiveCfg = Debug|Win32
+		{DF870983-E164-4A0D-9B68-783236DDA195}.Debug|x86.Build.0 = Debug|Win32
+		{DF870983-E164-4A0D-9B68-783236DDA195}.Release|x86.ActiveCfg = Release|Win32
+		{DF870983-E164-4A0D-9B68-783236DDA195}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2863889C-2AC4-447B-8719-BE32FBAFA6A8}
+	EndGlobalSection
+EndGlobal

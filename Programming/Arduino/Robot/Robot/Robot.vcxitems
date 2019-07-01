@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <ItemsProjectGuid>{34202f83-fb6f-4a09-a866-e6f71caa8b95}</ItemsProjectGuid>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ProjectCapability Include="SourceItemsFromImports" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="$(MSBuildThisFileDirectory)library.properties" />
+    <Text Include="$(MSBuildThisFileDirectory)src\Robot.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- <ClInclude Include="$(MSBuildThisFileDirectory)Robot.h" /> -->
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Application.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Core.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Debug.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\EntryPoint.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Error.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Analog\AnalogDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Analog\AnalogLED.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\CommDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Device.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Digital\Button.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Digital\DigitalDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Digital\DigitalLED.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\I2C\I2CDevice.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Timer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Robot\Application.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Robot\Error.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Device.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Timer.cpp" />
+  </ItemGroup>
+</Project>

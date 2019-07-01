@@ -1,0 +1,24 @@
+{
+    "Header": {
+        "Comment": "All values are metric (mm)",
+        "CreationDate": "2019-04-16T05:43:01Z",
+        "GenerationSoftware": {
+            "Application": "EAGLE",
+            "Vendor": "Autodesk",
+            "Version": "9.3.2"
+        },
+        "Part": "Single"
+    },
+    "Overall": {
+        "BoardThickness": 1.57,
+        "LayerNumber": 2,
+        "Name": {
+            "ProjectId": "Board 0"
+        },
+        "Owner": "Marc Cooke-Russell <marc.cookerussell@gmail.com>",
+        "Size": {
+            "X": 209.930363,
+            "Y": 189.650413
+        }
+    }
+}

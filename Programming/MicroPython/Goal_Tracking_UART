@@ -1,0 +1,143 @@
+import sensor, image, time, pyb, ustruct
+
+#
+#   Variables
+#
+
+led = pyb.LED(2)    # Red LED = 1, Green LED = 2, Blue LED = 3, IR LEDs = 4.
+usb = pyb.USB_VCP() # This is a serial port object that allows you to communciate with your computer.
+                    # While it is not open the code below runs.
+
+threshold_index = 0 # 0 for yellow goal, 1 for blue goal
+
+# Color Tracking Thresholds (L Min, L Max, A Min, A Max, B Min, B Max)
+# The below thresholds track in general red/green/blue things. You may wish to tune them...
+thresholds = [(60, 85, 0, 45, 20, 65),    # yellow goal
+              (25, 70, 0, 30, -65, -30)]   # blue goal
+
+white = (85, 100, -5, 5, -5, 5)
+
+clock = time.clock()
+
+# READ ME!!!
+#
+# Please understand that when your OpenMV Cam is not the I2C master it may miss responding to
+# sending data as a I2C slave no matter if you call "i2c.send()" in an interupt callback or in the
+# main loop below. When this happens the Arduino will get a NAK and have to try reading from the
+# OpenMV Cam again. Note that both the Arduino and OpenMV Cam I2C drivers are not good at getting
+# unstuck after encountering any I2C errors. On the OpenMV Cam and Arduino you can recover by
+# de-initing and then re-initing the I2C peripherals.
+
+# The hardware I2C bus for your OpenMV Cam is always I2C bus 2.
+bus = pyb.I2C(2, pyb.I2C.SLAVE, addr=0x12)
+bus.deinit() # Fully reset I2C device...
+bus = pyb.I2C(2, pyb.I2C.SLAVE, addr=0x12)
+print("Waiting for Arduino...")
+
+
+#
+#   Functions to use for the camera program
+#
+
+def init_camera():
+    sensor.reset()
+    sensor.set_pixformat(sensor.RGB565)
+    sensor.set_framesize(sensor.QVGA)
+    sensor.skip_frames(time = 500)
+    sensor.set_auto_gain(False)     # must be turned off for color tracking
+    sensor.set_auto_whitebal(False) # must be turned off for color tracking
+
+    sensor.set_vflip(True)
+    sensor.set_hmirror(True)
+
+def get_opposing_goal():
+    blue = False
+    yellow = False
+
+    led_on = False
+    t_prev = clock.avg()
+
+    while (True):
+        blue = False
+        yellow = False
+
+        if clock.avg() - t_prev > 500:
+            if led_on:
+                t_prev = clock.avg();
+                led.off()
+                led_on = False
+            else:
+                t_prev = clock.avg();
+                led.on()
+                led_on = True
+
+        img = sensor.snapshot()
+        for blob in img.find_blobs([thresholds[0]], pixels_threshold=200, area_threshold=200, merge=True):
+            img.draw_rectangle(blob.rect(), color=[255, 255, 0])
+            img.draw_cross(blob.cx(), blob.cy(), color=[255, 255, 0])
+            yellow = True   # found a yellow goal
+        for blob in img.find_blobs([thresholds[1]], pixels_threshold=200, area_threshold=200, merge=True):
+            img.draw_rectangle(blob.rect(), color=[0, 127, 255])
+            img.draw_cross(blob.cx(), blob.cy(), color=[0, 127, 255])
+            blue = True     # found a blue goal
+
+        if yellow == True and blue == False:
+            global threshold_index
+            threshold_index = 0
+            print(threshold_index)
+            break
+        elif yellow == False and blue == True:
+            global threshold_index
+            threshold_index = 1
+            print(threshold_index)
+            break
+        print(threshold_index)
+    led.off()
+
+def send_i2c_data(center_x, center_y):
+    print("Sending...")
+    cx1 = center_x & 0xFF
+    cx2 = (center_x >> 8) & 0xFF
+    cy1 = center_y & 0xFF
+    cy2 = (center_y >> 8) & 0xFF
+    #
+    #msg = chr(97) + chr(98) + chr(99) + chr(100)
+    data = ustruct.pack("BBBB", cx1, cx2, cy1, cy2)
+    print(len(data))
+    try:
+        bus.send(ustruct.pack("<h", len(data)), timeout=5) # Send the len first (16-bits).
+        try:
+            bus.send(data, timeout=250) # Send the data second.
+            print("Sent Data!") # Only reached on no error.
+        except OSError as err:
+            pass # Don't care about errors - so pass.
+            # Note that there are 3 possible errors. A timeout error, a general purpose error, or
+            # a busy error. The error codes are 116, 5, 16 respectively for "err.arg[0]".
+    except OSError as err:
+        pass # Don't care about errors - so pass.
+        # Note that there are 3 possible errors. A timeout error, a general purpose error, or
+        # a busy error. The error codes are 116, 5, 16 respectively for "err.arg[0]".
+
+def get_goal_area():
+    # Only blobs that with more pixels than "pixel_threshold" and more area than "area_threshold" are
+    # returned by "find_blobs" below. Change "pixels_threshold" and "area_threshold" if you change the
+    # camera resolution. "merge=True" merges all overlapping blobs in the image.
+
+    while(True):
+        clock.tick()
+        img = sensor.snapshot()
+        img.binary([thresholds[threshold_index]])
+        for blob in img.find_blobs([white], pixels_threshold=200, area_threshold=200, merge=True):
+            img.draw_rectangle(blob.rect())
+            img.draw_cross(blob.cx(), blob.cy())
+            #send_i2c_data(blob.cx(), blob.cy())
+        #print(clock.fps())
+
+
+#
+#   Beginning of the camera program
+#
+
+init_camera()
+get_opposing_goal()
+get_goal_area()

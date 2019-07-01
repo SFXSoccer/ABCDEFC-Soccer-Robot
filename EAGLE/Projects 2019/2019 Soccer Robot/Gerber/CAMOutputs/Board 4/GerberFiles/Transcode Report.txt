@@ -1,0 +1,100 @@
+
+
+   ---- Transcoding 'C:\Users\Marc\MEGA\RoboCup\2019\EAGLE\Projects 2019\2019 Soccer Robot\Gerber\CAMOutputs\Board 4\GerberFiles\copper_top.gbr' ----   Tue Apr 16 17:18:42 2019
+
+D18   --> D100
+D20   --> D101
+D21   --> D102
+D22   --> D103
+D23   --> D104
+D24   --> D105
+D25   --> D106
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\Marc\MEGA\RoboCup\2019\EAGLE\Projects 2019\2019 Soccer Robot\Gerber\CAMOutputs\Board 4\GerberFiles\dimensions.gbr' ----   Tue Apr 16 17:18:42 2019
+
+D10   --> D107
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\Marc\MEGA\RoboCup\2019\EAGLE\Projects 2019\2019 Soccer Robot\Gerber\CAMOutputs\Board 4\GerberFiles\silkscreen_bottom.gbr' ----   Tue Apr 16 17:18:42 2019
+
+D10   --> D108
+D11   --> D109
+D12   --> D110
+D13   --> D111
+D14   --> D112
+D15   --> D113
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\Marc\MEGA\RoboCup\2019\EAGLE\Projects 2019\2019 Soccer Robot\Gerber\CAMOutputs\Board 4\GerberFiles\silkscreen_top.gbr' ----   Tue Apr 16 17:18:42 2019
+
+D10   --> D114
+D11   --> D115
+D12   --> D116
+D13   --> D117
+D14   --> D118
+D15   --> D119
+D16   --> D120
+D17   --> D121
+D18   --> D122
+D19   --> D123
+D20   --> D124
+D21   --> D125
+D22   --> D126
+D23   --> D127
+D24   --> D128
+D25   --> D129
+D26   --> D130
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\Marc\MEGA\RoboCup\2019\EAGLE\Projects 2019\2019 Soccer Robot\Gerber\CAMOutputs\Board 4\GerberFiles\soldermask_bottom.gbr' ----   Tue Apr 16 17:18:42 2019
+
+D10   --> D131
+D11   --> D132
+D12   --> D133
+D13   --> D134
+D14   --> D135
+D15   --> D136
+D16   --> D137
+D17   --> D138
+D18   --> D139
+D19   --> D140
+D20   --> D141
+D21   --> D142
+D22   --> D143
+D23   --> D144
+D24   --> D145
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\Marc\MEGA\RoboCup\2019\EAGLE\Projects 2019\2019 Soccer Robot\Gerber\CAMOutputs\Board 4\GerberFiles\soldermask_top.gbr' ----   Tue Apr 16 17:18:42 2019
+
+D10   --> D146
+D11   --> D147
+D12   --> D148
+D13   --> D149
+D14   --> D150
+D15   --> D151
+D16   --> D152
+D17   --> D153
+D18   --> D154
+D19   --> D155
+D20   --> D156
+D21   --> D157
+D22   --> D158
+D23   --> D159
+D24   --> D160
+D25   --> D161
+D26   --> D162
+-----------------------------------------------------------------
+
+
+   ---- Transcoding 'C:\Users\Marc\MEGA\RoboCup\2019\EAGLE\Projects 2019\2019 Soccer Robot\Gerber\CAMOutputs\Board 4\GerberFiles\solderpaste_top.gbr' ----   Tue Apr 16 17:18:42 2019
+
+D10   --> D163
+D11   --> D164
+-----------------------------------------------------------------
