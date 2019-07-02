@@ -5,7 +5,7 @@
 
 void Begin()
 {
-	
+
 }
 
 void End()
@@ -15,7 +15,7 @@ void End()
 
 void Run()
 {
-	for (int i = 0; i < 24; i++)
+	/*for (int i = 0; i < 24; i++)
 	{
 		if (i < 23)
 		{
@@ -24,5 +24,7 @@ void Run()
 		}
 		else
 			Serial.println(IRSensors->GetValue(i));
-	}
+	}*/
+
+	Motors->Rotate(70);
 }

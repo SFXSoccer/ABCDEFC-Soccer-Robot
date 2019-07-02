@@ -56,95 +56,33 @@ void receiveEvent(int bytes)
 
 	switch (cmd)
 	{
-	case CMD_MOVE:
-		if (bytes == 4)
+	case CMD_MOTOR:
+		if (bytes == 8)
 		{
-			uint8_t high = Wire1.read();
-			uint8_t low = Wire1.read();
-			uint16_t degree = (((high & 0xFF) << 8) | (low & 0xFF));
-			uint8_t speed = Wire1.read();
+			uint8_t degreeHigh = Wire1.read();
+			uint8_t degreeLow = Wire1.read();
+			int16_t degree = (((degreeHigh & 0xFF) << 8) | (degreeLow & 0xFF));
 
-			Vector2f dir(degree);
+			uint8_t speedHigh = Wire1.read();
+			uint8_t speedLow = Wire1.read();
+			int16_t speed = (((speedHigh & 0xFF) << 8) | (speedLow & 0xFF));
 
-			float motorAngles[3] = { MOTOR_1_ANGLE, MOTOR_2_ANGLE, MOTOR_3_ANGLE };
+			uint8_t rotationHigh = Wire1.read();
+			uint8_t rotationLow = Wire1.read();
+			int16_t rotation = (((rotationHigh & 0xFF) << 8) | (rotationLow & 0xFF));
 
-			for (int i = 0; i < 3; i++)
+			bool rotate = Wire1.read() == 0x01 ? true : false;
+
+			if (rotate)
 			{
-				Vector2f vec(motorAngles[i]);
-				uint32_t velocity = vec * dir * speed;
-				uint8_t newSpeed = abs(velocity);
-				uint8_t newDir = velocity >= 0 ? DIR_FORWARD : DIR_REVERSE;
-				bool newBrake = velocity == 0;
-
-				if (i == 0)
-					m_Motor1->SetData(newSpeed, newDir, newBrake);
-				else if (i == 1)
-					m_Motor2->SetData(newSpeed, newDir, newBrake);
-				else if (i == 2)
-					m_Motor3->SetData(newSpeed, newDir, newBrake);
+				m_Motor1->SetData(abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, rotation == 0);
+				m_Motor2->SetData(abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, rotation == 0);
+				m_Motor3->SetData(abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, rotation == 0);
 			}
-		}
-		break;
-	case CMD_MOTOR_1:
-		if (bytes == 4)
-		{
-			uint8_t speed = Wire1.read();
-			uint8_t direction = Wire1.read();
-			bool brake = Wire1.read() == 0x01;
-			m_Motor1->SetData(speed, direction, brake);
-		}
-		break;
-	case CMD_MOTOR_2:
-		if (bytes == 4)
-		{
-			uint8_t speed = Wire1.read();
-			uint8_t direction = Wire1.read();
-			bool brake = Wire1.read() == 0x01;
-			m_Motor2->SetData(speed, direction, brake);
-		}
-		break;
-	case CMD_MOTOR_3:
-		if (bytes == 4)
-		{
-			uint8_t speed = Wire1.read();
-			uint8_t direction = Wire1.read();
-			bool brake = Wire1.read() == 0x01;
-			m_Motor3->SetData(speed, direction, brake);
-		}
-		break;
-	case CMD_MOTOR_4:
-		if (bytes == 4)
-		{
-			uint8_t speed = Wire1.read();
-			uint8_t direction = Wire1.read();
-			bool brake = Wire1.read() == 0x01;
-			m_Motor4->SetData(speed, direction, brake);
-		}
-		break;
-	case CMD_MOTOR_ALL:
-		if (bytes == 4)
-		{
-			uint8_t speed = Wire1.read();
-			uint8_t direction = Wire1.read();
-			bool brake = Wire1.read() == 0x01;
-
-			// Don't include motor 4 as it's a kicker motor
-			m_Motor1->SetData(speed, direction, brake);
-			m_Motor2->SetData(speed, direction, brake);
-			m_Motor3->SetData(speed, direction, brake);
-		}
-		break;
-	case CMD_MOTOR_OFFSET:
-		if (bytes == 3)
-		{
-			uint8_t high = Wire1.read();
-			uint8_t low = Wire1.read();
-			int16_t offset = (((high & 0xFF) << 8) | (low & 0xFF));
-
-			// Don't include motor 4 as it's a kicker motor
-			m_Motor1->SetOffset(offset);
-			m_Motor2->SetOffset(offset);
-			m_Motor3->SetOffset(offset);
+			else
+			{
+				VectorMove(degree, speed);
+			}
 		}
 		break;
 	case CMD_LIGHTGATE:
@@ -166,4 +104,27 @@ void receiveEvent(int bytes)
 
 	while (Wire1.available())
 		Wire1.read();
+}
+
+void VectorMove(int16_t degree, int16_t speed)
+{
+	Vector2f dir(degree);
+
+	float motorAngles[3] = { MOTOR_1_ANGLE, MOTOR_2_ANGLE, MOTOR_3_ANGLE };
+
+	for (int i = 0; i < 3; i++)
+	{
+		Vector2f vec(motorAngles[i]);
+		int32_t velocity = vec * dir * speed;
+		uint8_t newSpeed = abs(velocity);
+		uint8_t newDir = velocity >= 0 ? DIR_FORWARD : DIR_REVERSE;
+		bool newBrake = velocity == 0;
+
+		if (i == 0)
+			m_Motor1->SetData(newSpeed, newDir, newBrake);
+		else if (i == 1)
+			m_Motor2->SetData(newSpeed, newDir, newBrake);
+		else if (i == 2)
+			m_Motor3->SetData(newSpeed, newDir, newBrake);
+	}
 }

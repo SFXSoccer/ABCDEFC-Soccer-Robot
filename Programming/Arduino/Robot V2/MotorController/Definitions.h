@@ -27,14 +27,8 @@
 
 #pragma region Commands
 
-#define CMD_MOVE				0x00
-#define CMD_MOTOR_1				0x01
-#define CMD_MOTOR_2				0x02
-#define CMD_MOTOR_3				0x03
-#define CMD_MOTOR_4				0x04
-#define CMD_MOTOR_ALL			0x05
-#define CMD_MOTOR_OFFSET		0x06
-#define CMD_LIGHTGATE			0x07
+#define CMD_MOTOR				0x15
+#define CMD_LIGHTGATE			0x16
 
 #pragma endregion
 

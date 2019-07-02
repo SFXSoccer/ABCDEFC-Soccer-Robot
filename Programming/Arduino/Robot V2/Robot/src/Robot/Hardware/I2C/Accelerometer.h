@@ -2,8 +2,8 @@
 
 #include "I2CDevice.h"
 
-#include "../../../../lib/Adafruit_Sensor/Adafruit_Sensor.h";
-#include "../../../../lib/Adafruit_LSM303DLHC/Adafruit_LSM303_U.h";
+#include "../../../lib/Adafruit_Sensor/Adafruit_Sensor.h"
+#include "../../../lib/Adafruit_LSM303DLHC/Adafruit_LSM303_U.h"
 
 class Accelerometer : public I2CDevice
 {

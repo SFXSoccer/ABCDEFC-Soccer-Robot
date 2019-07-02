@@ -50,7 +50,8 @@ void Init()
 	ButtomComms = new Button("CommButton", PIN_BUTTON_2);
 	ButtomComms->SetPressedEvent(&ToggleComms);
 
-	//XBee = new Communication("Xbee", new SoftwareSer());
+	SoftwareSerial commSerial(7, 8);
+	XBee = new Communication("Xbee", &commSerial);
 
 	Accel = new Accelerometer("Accelerometer", LSM303_ADDRESS_ACCEL);
 	IRSensors = new IRSensorController("IRSensors");
@@ -84,6 +85,7 @@ void Update()
 	LightgateSensor->Update();
 	LightSensors->Update();
 	IRSensors->Update();
+	Motors->Update();
 
 #ifdef SHOW_UPS
 	__Updates++;

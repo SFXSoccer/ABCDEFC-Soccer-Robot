@@ -19,9 +19,9 @@
   </ItemGroup>
   <ItemGroup>
     <!-- <ClInclude Include="$(MSBuildThisFileDirectory)Robot.h" /> -->
-    <ClInclude Include="$(MSBuildThisFileDirectory)lib\Adafruit_LSM303DLHC\Adafruit_LSM303.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)lib\Adafruit_LSM303DLHC\Adafruit_LSM303_U.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)lib\Adafruit_Sensor\Adafruit_Sensor.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\lib\Adafruit_LSM303DLHC\Adafruit_LSM303.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\lib\Adafruit_LSM303DLHC\Adafruit_LSM303_U.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\lib\Adafruit_Sensor\Adafruit_Sensor.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Core.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\EntryPoint.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Device.h" />
@@ -36,13 +36,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\I2C\MotorController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\I2C\TSOPSensorArray.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Serial\Communication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\OtherRobot.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Diagnostic.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Error.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Utils\EventTimer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Timer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)lib\Adafruit_LSM303DLHC\Adafruit_LSM303_U.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)src\lib\Adafruit_LSM303DLHC\Adafruit_LSM303_U.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Diagnostic.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Error.cpp" />
   </ItemGroup>
