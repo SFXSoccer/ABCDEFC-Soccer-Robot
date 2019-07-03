@@ -10,6 +10,7 @@
 #include "Robot/Hardware/I2C/Magnetometer.h"
 #include "Robot/Hardware/I2C/MotorController.h"
 #include "Robot/Hardware/I2C/TSOPSensorArray.h"
+#include "Robot/Hardware/Serial/Camera.h"
 #include "Robot/Hardware/Serial/Communication.h"
 
 

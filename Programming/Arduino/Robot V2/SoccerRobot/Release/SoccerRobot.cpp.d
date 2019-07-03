@@ -28,10 +28,12 @@ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\SoccerRob
  C:\Users\Marc\MEGA\RoboCup\2019\Git\Programming\Arduino\Robot\ V2\Robot\src/Robot/Hardware/I2C/Magnetometer.h \
  C:\Users\Marc\MEGA\RoboCup\2019\Git\Programming\Arduino\Robot\ V2\Robot\src/Robot/Hardware/I2C/MotorController.h \
  C:\Users\Marc\MEGA\RoboCup\2019\Git\Programming\Arduino\Robot\ V2\Robot\src/Robot/Hardware/I2C/TSOPSensorArray.h \
+ C:\Users\Marc\MEGA\RoboCup\2019\Git\Programming\Arduino\Robot\ V2\Robot\src/Robot/Hardware/Serial/Camera.h \
  C:\Users\Marc\MEGA\RoboCup\2019\Git\Programming\Arduino\Robot\ V2\Robot\src/Robot/Hardware/Serial/Communication.h \
  c:\users\marc\mega\robocup\2019\git\programming\arduino\robot\ v2\robot\src\robot\otherrobot.h \
  C:\Users\Marc\MEGA\RoboCup\2019\Git\Programming\Arduino\Robot\ V2\Robot\src/Robot/EntryPoint.h \
  C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\LightSensorController.h \
  C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\Definitions.h \
  C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\IRSensorController.h \
- C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\TSOP.h
+ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\TSOP.h \
+ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\Koala.h

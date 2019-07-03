@@ -3,8 +3,10 @@
 
 #include "LightSensorController.h"
 #include "IRSensorController.h"
+#include "Koala.h"
 
 Accelerometer* Accel;
+Camera* Cam;
 Communication* XBee;
 IRSensorController* IRSensors;
 Lightgate* LightgateSensor;
@@ -14,6 +16,8 @@ MotorController* Motors;
 
 Button* ButtomComms;
 
+Koala* DropBear;
+
 #ifdef SHOW_UPS
 uint32_t __Updates = 0;
 Timer __UPS_Counter;
@@ -22,7 +26,10 @@ Timer __UPS_Counter;
 void ToggleProgram()
 {
 	if (m_Running)
+	{
 		StopProgram();
+		Motors->Rotate(0);
+	}
 	else
 		StartProgram();
 }
@@ -40,6 +47,8 @@ void Init()
 
 	StatusLED = new DigitalLED("LED_Status", LED_STATUS);
 
+	DropBear = new Koala("Koala", PIN_KOALA_FADE, PIN_KOALA_BLINK);
+
 	Serial.println("Waiting for complete system powerup...");
 	delay(DELAY_POWERUP);
 	Serial.println("Initializing devices...");
@@ -52,6 +61,7 @@ void Init()
 
 	SoftwareSerial commSerial(7, 8);
 	XBee = new Communication("Xbee", &commSerial);
+	Cam = new Camera("Camera");
 
 	Accel = new Accelerometer("Accelerometer", LSM303_ADDRESS_ACCEL);
 	IRSensors = new IRSensorController("IRSensors");
@@ -86,6 +96,9 @@ void Update()
 	LightSensors->Update();
 	IRSensors->Update();
 	Motors->Update();
+	Cam->Update();
+
+	DropBear->Update();
 
 #ifdef SHOW_UPS
 	__Updates++;

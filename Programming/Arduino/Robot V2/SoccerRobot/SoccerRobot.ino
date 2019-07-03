@@ -3,6 +3,9 @@
 
 #include "SoccerRobot.h"
 
+Timer KickEnd;
+bool kick = false;
+
 void Begin()
 {
 
@@ -10,21 +13,10 @@ void Begin()
 
 void End()
 {
-	Motors->Rotate(0);
+
 }
 
 void Run()
 {
-	/*for (int i = 0; i < 24; i++)
-	{
-		if (i < 23)
-		{
-			Serial.print(IRSensors->GetValue(i));
-			Serial.print(", ");
-		}
-		else
-			Serial.println(IRSensors->GetValue(i));
-	}*/
-
-	Motors->Rotate(70);
+	if (Cam.)
 }

@@ -35,6 +35,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\I2C\Magnetometer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\I2C\MotorController.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\I2C\TSOPSensorArray.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Serial\Camera.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Hardware\Serial\Communication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\OtherRobot.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)src\Robot\Utils\Diagnostic.h" />

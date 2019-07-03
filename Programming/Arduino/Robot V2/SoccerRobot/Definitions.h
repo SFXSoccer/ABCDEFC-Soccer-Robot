@@ -32,4 +32,7 @@
 #define PIN_BUTTON_2					26
 #define PIN_BUTTON_3					27
 
+#define PIN_KOALA_FADE					10
+#define PIN_KOALA_BLINK					12
+
 #pragma endregion

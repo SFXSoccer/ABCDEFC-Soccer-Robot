@@ -57,7 +57,7 @@ void receiveEvent(int bytes)
 	switch (cmd)
 	{
 	case CMD_MOTOR:
-		if (bytes == 8)
+		if (bytes == 9)
 		{
 			uint8_t degreeHigh = Wire1.read();
 			uint8_t degreeLow = Wire1.read();
@@ -72,12 +72,13 @@ void receiveEvent(int bytes)
 			int16_t rotation = (((rotationHigh & 0xFF) << 8) | (rotationLow & 0xFF));
 
 			bool rotate = Wire1.read() == 0x01 ? true : false;
+			uint8_t pivot = Wire1.read();
 
 			if (rotate)
 			{
-				m_Motor1->SetData(abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, rotation == 0);
-				m_Motor2->SetData(abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, rotation == 0);
-				m_Motor3->SetData(abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, rotation == 0);
+				m_Motor1->SetData(pivot == 1 ? 0 : abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 1 && rotation == 0);
+				m_Motor2->SetData(pivot == 2 ? 0 : abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 2 && rotation == 0);
+				m_Motor3->SetData(pivot == 3 ? 0 : abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 3 && rotation == 0);
 			}
 			else
 			{

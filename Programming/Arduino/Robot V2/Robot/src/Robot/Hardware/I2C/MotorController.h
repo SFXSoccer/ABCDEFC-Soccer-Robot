@@ -8,21 +8,23 @@ typedef struct MotorData
 	int16_t Speed;
 	int16_t Rotation;
 	bool Rotate;
+	uint8_t Pivot;
 
 	MotorData() 
 	{ }
 
-	MotorData(int16_t degree, int16_t speed, int16_t rotation, bool rotate = false)
+	MotorData(int16_t degree, int16_t speed, int16_t rotation, bool rotate = false, uint8_t pivot = 0)
 		: Rotate(rotate)
 	{
 		Degree = constrain(degree, -360, 360);
 		Speed = constrain(speed, -255, 255);
 		Rotation = constrain(rotation, -255, 255);
+		Pivot = constrain(pivot, 0, 3);
 	}
 
 	bool Compare(MotorData data)
 	{
-		if (data.Degree == Degree && data.Speed == Speed && data.Rotation == Rotation && data.Rotate == Rotate)
+		if (data.Degree == Degree && data.Speed == Speed && data.Rotation == Rotation && data.Rotate == Rotate && data.Pivot == Pivot)
 			return true;
 		else
 			return false;
@@ -51,16 +53,16 @@ public:
 
 	void Move(int16_t degree, int16_t speed)
 	{
-		MotorData data(degree, speed, 0, false);
+		MotorData data(degree, speed, 0, false, 0);
 		if (m_MotorData.Compare(data))
 			return;
 		m_MotorData = data;
 		m_DataChanged = true;
 	}
 
-	void Rotate(int16_t speed)
+	void Rotate(int16_t speed, uint8_t pivot = 0)
 	{
-		MotorData data(0, speed, speed, true);
+		MotorData data(0, speed, speed, true, pivot);
 		if (m_MotorData.Compare(data))
 			return;
 		m_MotorData = data;
@@ -82,6 +84,7 @@ public:
 		Wire.write(data.Rotation & 0xFF);
 
 		Wire.write(data.Rotate ? 0x01 : 0x00);
+		Wire.write(data.Pivot & 0xFF);
 
 		Wire.endTransmission();
 		m_DataChanged = false;

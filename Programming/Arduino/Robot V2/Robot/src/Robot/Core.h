@@ -29,13 +29,20 @@
 #define MOTOR_3						0x02
 #define MOTOR_4						0x03
 
+#define PIVOT_1						0x01
+#define PIVOT_2						0x02
+#define PIVOT_3						0x03
+
 #define MOTOR_DIR_FORWARD			0x01
 #define MOTOR_DIR_REVERSE			0x00
 
-#define COMM_PACKET_SIZE				6
-#define COMM_PACKET_VERIFY				0xFF
-#define COMM_PACKET_START				0xFE
-#define COMM_PACKET_END					0xFD
+#define COMM_PACKET_SIZE			6
+#define COMM_PACKET_VERIFY			0xFF
+#define COMM_PACKET_START			0xFE
+#define COMM_PACKET_END				0xFD
+
+#define CAMERA_DATA_BYTE_COUNT		10
+#define CAMERA_GOAL_NOT_FOUND		255
 
 #pragma endregion
 
@@ -47,5 +54,6 @@
 
 #define CMD_MOTOR					0x15
 #define CMD_LIGHTGATE				0x16
+#define CMD_CAMERA					0xC5
 
 #pragma endregion
