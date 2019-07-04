@@ -37,7 +37,7 @@ void Run()
 	}
 	else
 	{
-		Center();
+		Motors->Move(-(LightSensors->GetCluster(0).Angle - 180) + 180, 70);
 	}
 
 	bool onWhite = LightSensors->OnWhite();

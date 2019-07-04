@@ -36,11 +36,15 @@ class MotorController : public I2CDevice
 {
 public:
 	MotorController() : I2CDevice()
-	{ }
+	{
+		m_MotorData = MotorData(0, 0, 0);
+	}
 
 	MotorController(const char* name, const uint8_t address)
 		: I2CDevice(name, address)
-	{ }
+	{
+		m_MotorData = MotorData(0, 0, 0);
+	}
 
 	void Update() override
 	{
@@ -114,6 +118,6 @@ private:
 	MotorData m_MotorData;
 	Timer m_SendTimer;
 
-	int16_t m_Offset;
+	int16_t m_Offset = 0;
 	bool m_DataChanged = false;
 };

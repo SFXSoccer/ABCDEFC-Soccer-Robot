@@ -34,52 +34,81 @@ public:
 		Diagnostic::SetLightSensorData(1, m_SensorArray2->GetCompressedValue());
 		Diagnostic::SetLightSensorData(2, m_SensorArray3->GetCompressedValue());
 
-		bool cluster = false;
-		bool cluster1 = false;
-		bool cluster2 = false;
-		bool cluster3 = false;
+		CalculateClusters();
+	}
 
-		float angleMin = 0.0f;
-		float angleMax = 0.0f;
+	void CalculateClusters()
+	{
+		m_Cluster1 = LightSensorCluster(-1, -1, -1);
+		m_Cluster2 = LightSensorCluster(-1, -1, -1);
+		m_Cluster3 = LightSensorCluster(-1, -1, -1);
+
+		bool cluster1Done = false;
+		bool cluster2Done = false;
+		bool cluster3Done = false;
 
 		for (int i = 0; i < SENSOR_LIGHT_COUNT; i++)
 		{
-			if (GetValue(i) == 0x01)
+			if (!cluster1Done)
 			{
-				angleMin = i * 15;
-				cluster = true;
-			}
-			else if (GetValue(i) == 0x00)
-			{
-				if (cluster)
+				if (GetValue(i) == 0x01)
 				{
-					angleMax = i * 15;
-					if (!cluster1)
+					if (m_Cluster1.AngleMin == -1)
+						m_Cluster1.AngleMin = i * 15;
+					else
+						m_Cluster1.AngleMax = i * 15;
+				}
+				else if (m_Cluster1.AngleMin != -1)
+				{
+					m_Cluster1.Angle = m_Cluster1.AngleMax > -1 ? (m_Cluster1.AngleMin + m_Cluster1.AngleMax) / 2 : m_Cluster1.AngleMin;
+					cluster1Done = true;
+				}
+			}
+			else if (!cluster2Done)
+			{
+				if (GetValue(i) == 0x01)
+				{
+					if (m_Cluster2.AngleMin == -1)
+						m_Cluster2.AngleMin = i * 15;
+					else
+						m_Cluster2.AngleMax = i * 15;
+
+					if (i == SENSOR_LIGHT_COUNT - 1 && GetValue(0) == 0x01)
 					{
-						LightSensorCluster c((angleMin + angleMax) / 2, angleMin, angleMax);
-						m_Cluster1 = c;
+						m_Cluster1.AngleMin = m_Cluster2.AngleMin - 360;
+						m_Cluster1.Angle = m_Cluster1.AngleMax > -1 ? (m_Cluster1.AngleMin + m_Cluster1.AngleMax) / 2 : m_Cluster1.AngleMin;
+						m_Cluster2 = LightSensorCluster(-1, -1, -1);
 					}
-					else if (!cluster2)
+				}
+				else if (m_Cluster2.AngleMin != -1)
+				{
+					m_Cluster2.Angle = m_Cluster2.AngleMax > -1 ? (m_Cluster2.AngleMin + m_Cluster2.AngleMax) / 2 : m_Cluster2.AngleMin;
+					cluster2Done = true;
+				}
+			}
+			else if (!cluster3Done)
+			{
+				if (GetValue(i) == 0x01)
+				{
+					if (m_Cluster3.AngleMin == -1)
+						m_Cluster3.AngleMin = i * 15;
+					else
+						m_Cluster3.AngleMax = i * 15;
+
+					if (i == SENSOR_LIGHT_COUNT - 1 && GetValue(0) == 0x01)
 					{
-						LightSensorCluster c((angleMin + angleMax) / 2, angleMin, angleMax);
-						m_Cluster2 = c;
+						m_Cluster1.AngleMin = m_Cluster3.AngleMin - 360;
+						m_Cluster1.Angle = m_Cluster1.AngleMax > -1 ? (m_Cluster1.AngleMin + m_Cluster1.AngleMax) / 2 : m_Cluster1.AngleMin;
+						m_Cluster3 = LightSensorCluster(-1, -1, -1);
 					}
-					else if (!cluster3)
-					{
-						LightSensorCluster c((angleMin + angleMax) / 2, angleMin, angleMax);
-						m_Cluster3 = c;
-					}
-					cluster = false;
+				}
+				else if (m_Cluster3.AngleMin != -1)
+				{
+					m_Cluster3.Angle = m_Cluster3.AngleMax > -1 ? (m_Cluster3.AngleMin + m_Cluster3.AngleMax) / 2 : m_Cluster3.AngleMin;
+					cluster3Done = true;
 				}
 			}
 		}
-
-		if (!cluster1)
-			m_Cluster1.Angle = -1;
-		if (!cluster2)
-			m_Cluster2.Angle = -1;
-		if (!cluster3)
-			m_Cluster3.Angle = -1;
 	}
 
 	bool VerifyConnections()
