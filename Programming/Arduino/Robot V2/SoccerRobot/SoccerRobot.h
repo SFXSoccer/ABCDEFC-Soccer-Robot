@@ -28,6 +28,7 @@ void ToggleProgram()
 	if (m_Running)
 	{
 		StopProgram();
+		Motors->SetOffset(0);
 		Motors->Rotate(0);
 	}
 	else
@@ -79,8 +80,7 @@ void Init()
 
 	Diagnostic::SetConnectedDevice(4, lightGateConnection & motorControllerConnection);
 
-	if (Error::GetStatus() == Error::ErrorStatus::FAILURE && 
-		(lightGateConnection && motorControllerConnection && lightSensorConnection && IRSensorConnection))
+	if (Error::GetStatus() == Error::ErrorStatus::FAILURE)
 	{
 		Serial.println("Verification connections failed!");
 		return;
@@ -92,6 +92,8 @@ void Init()
 
 void Update()
 {
+	Compass->Update();
+	//Accel->Update();
 	LightgateSensor->Update();
 	LightSensors->Update();
 	IRSensors->Update();

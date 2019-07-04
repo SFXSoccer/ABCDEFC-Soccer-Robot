@@ -24,5 +24,8 @@
     <ClInclude Include="__vm\.TSOPSensorArray.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TSOP.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

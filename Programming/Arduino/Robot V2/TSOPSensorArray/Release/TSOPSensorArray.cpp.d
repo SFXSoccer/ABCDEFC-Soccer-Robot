@@ -15,4 +15,5 @@ C:\Users\Marc\AppData\Local\Temp\VMBuilds\TSOPSensorArray\MiniCore_328\Release\T
  C:\Users\Marc\AppData\Local\arduino15\packages\MiniCore\hardware\avr\2.0.1\libraries\Wire1\src/Wire1.h \
  C:\Users\Marc\AppData\Local\arduino15\packages\MiniCore\hardware\avr\2.0.1\cores\MCUdude_corefiles/Arduino.h \
  C:\Users\Marc\AppData\Local\arduino15\packages\MiniCore\hardware\avr\2.0.1\cores\MCUdude_corefiles/Stream.h \
- C:\Users\Marc\AppData\Local\Temp\VMBuilds\TSOPSensorArray\MiniCore_328\Release\Definitions.h
+ C:\Users\Marc\AppData\Local\Temp\VMBuilds\TSOPSensorArray\MiniCore_328\Release\Definitions.h \
+ C:\Users\Marc\AppData\Local\Temp\VMBuilds\TSOPSensorArray\MiniCore_328\Release\TSOP.h

@@ -2,7 +2,7 @@ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\Wire\Wire
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\libraries\Wire\WireIMXRT.cpp \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\libraries\Wire\Wire.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\libraries\Wire\WireKinetis.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/Arduino.h \
+ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release/pch/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/WProgram.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/avr/pgmspace.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/avr/interrupt.h \
@@ -38,4 +38,5 @@ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\Wire\Wire
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/WCharacter.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/elapsedMillis.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/Arduino.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/IntervalTimer.h
+ C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/IntervalTimer.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/pins_arduino.h

@@ -26,7 +26,7 @@ public:
 
 	void Update() override
 	{
-		if (m_ReadTimer >= SENSOR_I2C_DELAY_MS)
+		if (m_ReadTimer >= 100)
 		{
 			ReadSensor();
 
@@ -95,6 +95,6 @@ private:
 	// Formula: (deg + (min / 60.0)) / (180 / M_PI);
 	const float m_DeclinationAngle = (12.0 + (35.0 / 60.0)) / (180 / M_PI);
 
-	Adafruit_LSM303_Accel_Unified m_Sensor = Adafruit_LSM303_Accel_Unified(12345);
+	Adafruit_LSM303_Mag_Unified m_Sensor = Adafruit_LSM303_Mag_Unified(12345);
 	Timer m_ReadTimer;
 };

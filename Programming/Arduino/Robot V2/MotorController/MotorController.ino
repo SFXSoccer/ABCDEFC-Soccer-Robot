@@ -61,24 +61,28 @@ void receiveEvent(int bytes)
 		{
 			uint8_t degreeHigh = Wire1.read();
 			uint8_t degreeLow = Wire1.read();
-			int16_t degree = (((degreeHigh & 0xFF) << 8) | (degreeLow & 0xFF));
+			int16_t degree = ((degreeHigh << 8) | degreeLow);
 
 			uint8_t speedHigh = Wire1.read();
 			uint8_t speedLow = Wire1.read();
-			int16_t speed = (((speedHigh & 0xFF) << 8) | (speedLow & 0xFF));
+			int16_t speed = ((speedHigh << 8) | speedLow);
 
 			uint8_t rotationHigh = Wire1.read();
 			uint8_t rotationLow = Wire1.read();
-			int16_t rotation = (((rotationHigh & 0xFF) << 8) | (rotationLow & 0xFF));
+			int16_t rotation = ((rotationHigh << 8) | rotationLow);
 
 			bool rotate = Wire1.read() == 0x01 ? true : false;
 			uint8_t pivot = Wire1.read();
 
+			m_Motor1->SetOffset(rotation);
+			m_Motor2->SetOffset(rotation);
+			m_Motor3->SetOffset(rotation);
+
 			if (rotate)
 			{
-				m_Motor1->SetData(pivot == 1 ? 0 : abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 1 && rotation == 0);
-				m_Motor2->SetData(pivot == 2 ? 0 : abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 2 && rotation == 0);
-				m_Motor3->SetData(pivot == 3 ? 0 : abs(rotation), rotation >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 3 && rotation == 0);
+				m_Motor1->SetData(pivot == 1 ? 0 : abs(speed), speed >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 1 && speed == 0);
+				m_Motor2->SetData(pivot == 2 ? 0 : abs(speed), speed >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 2 && speed == 0);
+				m_Motor3->SetData(pivot == 3 ? 0 : abs(speed), speed >= 0 ? DIR_FORWARD : DIR_REVERSE, pivot != 3 && speed == 0);
 			}
 			else
 			{

@@ -30,8 +30,7 @@ public:
 		if (m_Braked)
 			Brake(!m_Braked);
 
-		//velo += m_Offset;
-		velo = constrain(velo, -255, 255);
+		velo = constrain(velo + m_Offset, -255, 255);
 
 		if (velo < 0)
 		{
@@ -71,7 +70,7 @@ public:
 
 	void Stop()
 	{
-		SetOffset(0);
+		//SetOffset(0);
 		Brake();
 		Set(0);
 	}

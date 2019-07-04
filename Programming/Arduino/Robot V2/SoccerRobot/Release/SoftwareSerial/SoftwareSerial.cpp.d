@@ -2,7 +2,7 @@ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\SoftwareS
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\libraries\SoftwareSerial\SoftwareSerial.cpp \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/avr/interrupt.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/avr/pgmspace.h \
- C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/Arduino.h \
+ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release/pch/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/WProgram.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/avr_functions.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/wiring.h \
@@ -37,6 +37,7 @@ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\SoftwareS
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/elapsedMillis.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/Arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/IntervalTimer.h \
+ C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/pins_arduino.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\libraries\SoftwareSerial/SoftwareSerial.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/Stream.h \
  C:\Program\ Files\ (x86)\Arduino\hardware\teensy\avr\cores\teensy3/HardwareSerial.h

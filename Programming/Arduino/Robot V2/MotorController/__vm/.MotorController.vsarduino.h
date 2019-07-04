@@ -15,7 +15,7 @@
 #define _VSARDUINO_H_
 #define __AVR_atmega328pb__
 #define __AVR_ATmega328PB__
-#define F_CPU 16000000L
+#define F_CPU 8000000L
 #define ARDUINO 10809
 #define ARDUINO_AVR_ATmega328
 #define ARDUINO_ARCH_AVR

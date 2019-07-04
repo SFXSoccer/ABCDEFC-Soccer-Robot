@@ -19,12 +19,19 @@ public:
 			Wire.requestFrom((int)m_Address, 1);
 
 			int count = 0;
+			bool onWhite = false;
 			while (Wire.available() != 0)
 			{
 				m_CompressedSensorValues = Wire.read();
 				for (int i = 0; i < SENSOR_LIGHT_DATA_COUNT; i++)
-					m_SensorValues[i] = (m_CompressedSensorValues >> i) & 0x01;
+				{
+					m_SensorValues[i] = (m_CompressedSensorValues >> (SENSOR_LIGHT_DATA_COUNT - (i + 1))) & 0x01;
+					if (m_SensorValues[i] == 0x01)
+						onWhite = true;
+				}
 				count++;
+
+				m_OnWhite = onWhite;
 			}
 
 			if (count == 0)
@@ -52,8 +59,11 @@ public:
 	uint8_t GetValue(int sensor) const { return m_SensorValues[sensor]; }
 	uint8_t GetCompressedValue() const { return m_CompressedSensorValues; }
 	uint8_t operator[](int x) const { return m_SensorValues[x]; }
+	bool OnWhite() const { return m_OnWhite; }
 private:
 	uint8_t m_SensorValues[SENSOR_LIGHT_DATA_COUNT] = { 0, 0, 0, 0, 0, 0, 0, 0 };
 	uint8_t m_CompressedSensorValues = 0x00;
+
+	bool m_OnWhite = false;
 	Timer m_ReadTimer;
 };

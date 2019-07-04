@@ -16,14 +16,16 @@ public:
 	{
 		if (m_ReadTimer >= SENSOR_I2C_DELAY_MS)
 		{
-			Wire.requestFrom((int)m_Address, 16);
+			Wire.requestFrom((int)m_Address, 1);
 
 			int count = 0;
 			while (Wire.available() != 0)
 			{
-				uint8_t high = Wire.read();
-				uint8_t low = Wire.read();
-				m_SensorValues[count] = (((high & 0xFF) << 8) | (low & 0xFF));
+				m_CompressedSensorValues = Wire.read();
+				for (int i = 0; i < SENSOR_TSOP_DATA_COUNT; i++)
+				{
+					m_SensorValues[i] = (m_CompressedSensorValues >> (SENSOR_TSOP_DATA_COUNT - (i + 1))) & 0x01;
+				}
 				count++;
 			}
 
@@ -49,9 +51,11 @@ public:
 		return true;
 	}
 
-	uint16_t GetValue(int sensor) const { return m_SensorValues[sensor]; }
-	uint16_t operator[](int x) const { return m_SensorValues[x]; }
+	uint8_t GetValue(int sensor) const { return m_SensorValues[sensor]; }
+	uint8_t GetCompressedValue() const { return m_CompressedSensorValues; }
+	uint8_t operator[](int x) const { return m_SensorValues[x]; }
 private:
-	uint16_t m_SensorValues[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	uint8_t m_SensorValues[SENSOR_TSOP_DATA_COUNT] = { 0, 0, 0, 0, 0, 0, 0, 0 };
+	uint8_t m_CompressedSensorValues = 0x00;
 	Timer m_ReadTimer;
 };

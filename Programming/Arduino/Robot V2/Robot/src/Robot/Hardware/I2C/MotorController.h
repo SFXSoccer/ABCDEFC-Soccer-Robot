@@ -53,7 +53,7 @@ public:
 
 	void Move(int16_t degree, int16_t speed)
 	{
-		MotorData data(degree, speed, 0, false, 0);
+		MotorData data(degree, speed, m_Offset, false, 0);
 		if (m_MotorData.Compare(data))
 			return;
 		m_MotorData = data;
@@ -62,7 +62,7 @@ public:
 
 	void Rotate(int16_t speed, uint8_t pivot = 0)
 	{
-		MotorData data(0, speed, speed, true, pivot);
+		MotorData data(0, speed, m_Offset, true, pivot);
 		if (m_MotorData.Compare(data))
 			return;
 		m_MotorData = data;
@@ -90,6 +90,11 @@ public:
 		m_DataChanged = false;
 	}
 
+	void SetOffset(int16_t value)
+	{
+		m_Offset = constrain(value, -255, 255);
+	}
+
 	bool VerifyConnection()
 	{
 		Timer timeout;
@@ -108,5 +113,7 @@ public:
 private:
 	MotorData m_MotorData;
 	Timer m_SendTimer;
+
+	int16_t m_Offset;
 	bool m_DataChanged = false;
 };

@@ -5,8 +5,8 @@
 #endif
 
 //#define NAME_ANT_MAN
-#define NAME_BLACK_PANTHER
-//#define NAME_DOCTOR_STRANGE
+//#define NAME_BLACK_PANTHER
+#define NAME_DOCTOR_STRANGE
 
 #pragma region General
 

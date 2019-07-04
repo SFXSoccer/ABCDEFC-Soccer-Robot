@@ -44,6 +44,9 @@
 #define CAMERA_DATA_BYTE_COUNT		10
 #define CAMERA_GOAL_NOT_FOUND		255
 
+#define CAMERA_IMAGE_WIDTH			160
+#define CAMERA_IMAGE_HEIGHT			120
+
 #pragma endregion
 
 #pragma region Commands

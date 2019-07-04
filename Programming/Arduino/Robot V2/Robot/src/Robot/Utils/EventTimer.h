@@ -10,7 +10,7 @@ public:
 	EventTimer(uint32_t interval, bool usingMicros = false)
 		: m_Interval(interval), m_UsingMicros(usingMicros)
 	{
-		if (micros)
+		if (usingMicros)
 			m_Start = micros();
 		else
 			m_Start = millis();

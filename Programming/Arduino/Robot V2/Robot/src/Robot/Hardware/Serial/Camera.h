@@ -20,6 +20,12 @@ typedef struct GoalData
 	GoalData(uint8_t x, uint8_t y, uint8_t width, uint8_t height)
 		: CenterX(x), CenterY(y), Width(width), Height(height)
 	{ }
+
+	bool Detected()
+	{
+		return CenterX != CAMERA_GOAL_NOT_FOUND && CenterY != CAMERA_GOAL_NOT_FOUND &&
+			Width != CAMERA_GOAL_NOT_FOUND && Height != CAMERA_GOAL_NOT_FOUND;
+	}
 } GoalData;
 
 class Camera : public Device
@@ -38,7 +44,6 @@ public:
 	{
 		if (Serial4.available() >= 10)
 		{
-			Serial.println("Test");
 			if (Serial4.read() == CMD_CAMERA)
 			{
 				for (int i = 0; i < 2; i++)
@@ -59,26 +64,39 @@ public:
 						BlueGoal = blue;
 					}
 				}
+				uint8_t goalColor = Serial4.read();
+				m_OpposingGoalColor = goalColor == 0x01 ? GoalColor::Yellow : goalColor == 0x02 ? GoalColor::Blue : GoalColor::None;
 			}
-			OpposingGoalColor = (GoalColor)Serial4.read();
 		}
 	}
 
 	GoalData Yellow() const { return YellowGoal; }
 	GoalData Blue() const { return BlueGoal; }
+
 	GoalData OpposingGoal() const
 	{
-		if (OpposingGoalColor == GoalColor::None)
+		Serial.println(m_OpposingGoalColor);
+		if (m_OpposingGoalColor == GoalColor::None)
 			nullptr;
-		else if (OpposingGoalColor == GoalColor::Yellow)
+		else if (m_OpposingGoalColor == GoalColor::Yellow)
 			return YellowGoal;
-		else if (OpposingGoalColor == GoalColor::Blue)
+		else if (m_OpposingGoalColor == GoalColor::Blue)
 			return BlueGoal;
 	}
 
-	GoalColor OpposingColor() const { return OpposingGoalColor; }
+	GoalData FriendlyGoal() const
+	{
+		if (m_OpposingGoalColor == GoalColor::None)
+			nullptr;
+		else if (m_OpposingGoalColor == GoalColor::Yellow)
+			return BlueGoal;
+		else if (m_OpposingGoalColor == GoalColor::Blue)
+			return YellowGoal;
+	}
+
+	GoalColor OpposingColor() const { return m_OpposingGoalColor; }
 private:
 	GoalData YellowGoal;
 	GoalData BlueGoal;
-	GoalColor OpposingGoalColor = GoalColor::None;
+	GoalColor m_OpposingGoalColor = GoalColor::None;
 };
