@@ -30,9 +30,6 @@
     <ClInclude Include="IRSensorController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TSOP.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="SoccerRobot.h">
       <Filter>Header Files</Filter>
     </ClInclude>

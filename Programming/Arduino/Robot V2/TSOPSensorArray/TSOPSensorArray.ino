@@ -43,7 +43,7 @@ void Update()
 	m_SensorValues[6]->Update();
 	m_SensorValues[7]->Update();
 
-	if (m_CapReset > 255)
+	if (m_CapReset > 6)
 	{
 		digitalWrite(PIN_POWER, LOW);
 		delay(2);

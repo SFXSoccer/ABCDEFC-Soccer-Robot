@@ -35,5 +35,4 @@ C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\SoccerRob
  C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\LightSensorController.h \
  C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\Definitions.h \
  C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\IRSensorController.h \
- C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\TSOP.h \
  C:\Users\Marc\AppData\Local\Temp\VMBuilds\SoccerRobot\teensy35\Release\Koala.h

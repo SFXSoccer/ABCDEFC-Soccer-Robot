@@ -9,56 +9,65 @@ public:
 	Communication() : Device()
 	{}
 
-	Communication(const char* name, SoftwareSerial* serial) 
+	Communication(const char* name) 
 		: Device(name)
 	{
-		m_Serial = serial;
+		Serial3.begin(9600);
+	}
 
-		m_Serial->begin(9600);
+	void Update(OtherRobot* robot, uint8_t data[], bool dontRecieve = false)
+	{
+
+		if (m_Enabled/* && t_prevUpdate > COMM_SERIAL_DELAY*/)
+		{
+			Send(data);
+			if (!dontRecieve)
+				Recieve(robot);
+		}
 	}
 
 	void Send(uint8_t data[])
 	{
-		m_Serial->write(COMM_PACKET_VERIFY);
-		m_Serial->write(COMM_PACKET_START);
+		Serial3.write(COMM_PACKET_VERIFY);
+		Serial3.write(COMM_PACKET_START);
 
 		for (int i = 0; i < COMM_PACKET_SIZE - 2; i++)
 		{
 			if (data[i] <= 255)
-				m_Serial->write((byte)data[i]);
+				Serial3.write((byte)data[i]);
 			else
 			{
-				m_Serial->write((byte)(data[i] & 0xFF));
-				m_Serial->write((byte)((data[i] >> 8) & 0xFF));
+				Serial3.write((byte)(data[i] & 0xFF));
+				Serial3.write((byte)((data[i] >> 8) & 0xFF));
 			}
 		}
 
-		m_Serial->write(COMM_PACKET_END);
+		Serial3.write(COMM_PACKET_END);
 	}
 
 	void Recieve(OtherRobot* robot)
 	{
-		if (!m_Serial->available())
+		if (!Serial3.available())
 			return;
 
 		bool recieved = false;
-		uint8_t verifyCode = m_Serial->read();
-		uint8_t startCode = m_Serial->peek();
+		uint8_t verifyCode = Serial3.read();
+		uint8_t startCode = Serial3.peek();
 
 		if (verifyCode == COMM_PACKET_VERIFY && startCode == COMM_PACKET_START)
 		{
-			m_Serial->read();
+			Serial3.read();
 			
 			uint8_t data[COMM_PACKET_SIZE - 2];
 			for (int i = 0; i < COMM_PACKET_SIZE - 3; i++)
-				data[i] = m_Serial->read();
+				data[i] = Serial3.read();
 			
 			robot->Mode = (PlayMode)data[0];
 			robot->HasBall = data[1];
 			robot->Playing = data[2];
 			robot->IRDirection = data[3];
 
-			if (m_Serial->read() == COMM_PACKET_END)
+			if (Serial3.read() == COMM_PACKET_END)
 				recieved = true;
 			m_PrevRecieve.Restart();
 		}
@@ -75,10 +84,15 @@ public:
 		else
 			m_HasConnected = true;
 	}
+
+	void SetEnabled(bool enabled)
+	{
+		m_Enabled = enabled;
+	}
 private:
-	SoftwareSerial* m_Serial;
 	Timer m_PrevRecieve;
 
+	bool m_Enabled = true;
 	bool m_Connected = false;
 	bool m_HasConnected = false;
 };

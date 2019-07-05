@@ -12,7 +12,7 @@ public:
 	void Update()
 	{
 		int value = analogRead(m_Pin);
-		if (value < IR_BACKGROUND * 0.25)
+		if (value < IR_BACKGROUND)
 			m_Value = 1;
 		else
 			m_Value = 0;

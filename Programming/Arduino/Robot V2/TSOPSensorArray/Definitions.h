@@ -4,9 +4,9 @@
 #error "Wrong board selected for this program, please select an ATmega328PB"
 #endif
 
-//#define NAME_CAPTAIN_AMERICA
+#define NAME_CAPTAIN_AMERICA
 //#define NAME_IRON_MAN
-#define NAME_THOR
+//#define NAME_THOR
 
 #pragma region General
 
@@ -29,7 +29,7 @@
 #define SENSOR_7			6
 #define SENSOR_8			7
 
-#define IR_BACKGROUND		800
+#define IR_BACKGROUND		125
 
 #pragma endregion
 

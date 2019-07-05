@@ -1,6 +1,8 @@
 //#define INIT_RUN
 //#define SHOW_UPS
 
+#define ROBOT_ATTACK
+
 #include "SoccerRobot.h"
 
 Timer KickEnd;
@@ -18,6 +20,10 @@ void End()
 
 void Run()
 {
+	StatusLED->Write(IRSensors->Cluster().Size > 3);
+	Serial.println(IRSensors->Cluster().Angle);
+	delay(10);
+	return;
 	SetMotorCompassOffset(14, 1);
 
 	if (!LightSensors->OnWhite())
@@ -37,7 +43,7 @@ void Run()
 	}
 	else
 	{
-		Motors->Move(-(LightSensors->GetCluster(0).Angle - 180) + 180, 70);
+		Motors->Move(-(LightSensors->GetCluster(0).Angle - 180) + 180, 255);
 	}
 
 	bool onWhite = LightSensors->OnWhite();
@@ -52,14 +58,32 @@ void GetToBall()
 {
 	if (LightgateSensor->GetValue())
 	{
-		Motors->Move(0, 255);
+		if (Cam->OpposingGoal().Detected())
+		{
+			if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) > 10)
+			{
+				Motors->Move(45, 255);
+			}
+			else if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) < -10)
+			{
+				Motors->Move(-45, 255);
+			}
+			else
+			{
+				Motors->Move(0, 255);
+			}
+		}
+		else
+		{
+			Motors->Move(0, 255);
+		}
 		return;
 	}
 
 	if (IRSensors->Direction() == 11)
-		Motors->Move(25, 170);
+		Motors->Move(25, 255);
 	else if (IRSensors->Direction() == 13)
-		Motors->Move(-25, 170);
+		Motors->Move(-25, 255);
 	else
 		Motors->Move(0, 255);
 }
@@ -68,21 +92,34 @@ void Orbit()
 {
 	uint8_t ir = IRSensors->Direction();
 	if (ir >= 0 && ir <= 4)
-		Motors->Move(-137, 170);
+		Move(-137, 255);
 	else if (ir <= 23 && ir >= 19)
-		Motors->Move(137, 170);
+		Move(137, 255);
 	else if (ir >= 5 && ir <= 6)
-		Motors->Move(180, 170);
+		Move(180, 255);
 	else if (ir <= 18 && ir >= 17)
-		Motors->Move(180, 170);
+		Move(180, 255);
 	else if (ir >= 7 && ir <= 10)
-		Motors->Move(137, 170);
+		Move(137, 255);
 	else if (ir <= 16 && ir >= 14)
-		Motors->Move(-137, 170);
+		Move(-137, 255);
 	else if (ir == 11)
-		Motors->Move(90, 170);
+		Move(90, 255);
 	else if (ir == 13)
-		Motors->Move(-90, 170);
+		Move(-90, 255);
+}
+
+void Move(int16_t degree, int16_t speed)
+{
+	/*if (CAMERA_IMAGE_WIDTH - Cam->FriendlyGoal().Width < 10)
+	{
+		if (degree > 90)
+			degree = -90;
+		else if (degree < -90)
+			degree = 90;
+	}*/
+
+	Motors->Move(degree, speed);
 }
 
 void Center()

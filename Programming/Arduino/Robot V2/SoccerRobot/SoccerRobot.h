@@ -18,6 +18,13 @@ Button* ButtomComms;
 
 Koala* DropBear;
 
+#ifdef ROBOT_ATTACK
+PlayMode mode = PlayMode::Attacker;
+#else
+PlayMode mode = PlayMode::Defender;
+#endif
+OtherRobot Friendly;
+
 #ifdef SHOW_UPS
 uint32_t __Updates = 0;
 Timer __UPS_Counter;
@@ -60,8 +67,7 @@ void Init()
 	ButtomComms = new Button("CommButton", PIN_BUTTON_2);
 	ButtomComms->SetPressedEvent(&ToggleComms);
 
-	SoftwareSerial commSerial(7, 8);
-	XBee = new Communication("Xbee", &commSerial);
+	XBee = new Communication("Xbee");
 	Cam = new Camera("Camera");
 
 	Accel = new Accelerometer("Accelerometer", LSM303_ADDRESS_ACCEL);
@@ -101,6 +107,9 @@ void Update()
 	Cam->Update();
 
 	DropBear->Update();
+
+	uint8_t data[5] = { (int)mode, LightgateSensor->GetValue(), m_Running, IRSensors->Direction() };
+	XBee->Update(&Friendly, data);
 
 #ifdef SHOW_UPS
 	__Updates++;
