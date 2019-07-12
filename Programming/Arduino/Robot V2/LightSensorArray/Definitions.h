@@ -18,7 +18,7 @@
 	#define	ADDRESS					0x08
 #endif
 
-#define LIGHT_COLOR_WHITE_BUFFER	200
+#define LIGHT_COLOR_WHITE_BUFFER	150
 
 #define SENSOR_COUNT				8
 

@@ -53,6 +53,9 @@ public:
 		uint8_t highcount = 0;
 		uint8_t hightotal = 0;
 		bool cluster = false;
+
+		m_Cluster = IRSensorCluster(-1, -1);
+
 		for (int i = 0; i < SENSOR_TSOP_COUNT; i++)
 		{
 			uint8_t value = GetValue(i);
@@ -64,7 +67,7 @@ public:
 				total += i;
 				cluster = true;
 			}
-			if (!value && cluster)
+			if ((!value || i == SENSOR_TSOP_COUNT - 1) && cluster)
 			{
 				if (count > highcount)
 				{

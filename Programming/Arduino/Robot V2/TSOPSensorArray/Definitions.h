@@ -4,9 +4,9 @@
 #error "Wrong board selected for this program, please select an ATmega328PB"
 #endif
 
-#define NAME_CAPTAIN_AMERICA
+//#define NAME_CAPTAIN_AMERICA
 //#define NAME_IRON_MAN
-//#define NAME_THOR
+#define NAME_THOR
 
 #pragma region General
 

@@ -20,11 +20,8 @@ void End()
 
 void Run()
 {
-	StatusLED->Write(IRSensors->Cluster().Size > 3);
-	Serial.println(IRSensors->Cluster().Angle);
-	delay(10);
-	return;
-	SetMotorCompassOffset(14, 1);
+	CameraOffset();
+	//SetMotorCompassOffset(14, 1);
 
 	if (!LightSensors->OnWhite())
 	{
@@ -38,7 +35,15 @@ void Run()
 		}
 		else
 		{
-			Orbit();
+			if (IRSensors->Cluster().Size >= 2)
+			{
+				if (-(IRSensors->Cluster().Angle - 180) >= 0)
+					Motors->Move(-(IRSensors->Cluster().Angle - 180) + 90, 220);
+				else if (-(IRSensors->Cluster().Angle - 180) < 0)
+					Motors->Move(-(IRSensors->Cluster().Angle - 180) - 90, 220);
+			}
+			else
+				Motors->Move(-(IRSensors->Cluster().Angle - 180), 220);
 		}
 	}
 	else
@@ -60,18 +65,7 @@ void GetToBall()
 	{
 		if (Cam->OpposingGoal().Detected())
 		{
-			if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) > 10)
-			{
-				Motors->Move(45, 255);
-			}
-			else if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) < -10)
-			{
-				Motors->Move(-45, 255);
-			}
-			else
-			{
-				Motors->Move(0, 255);
-			}
+			Motors->Move(0, 255);
 		}
 		else
 		{
@@ -81,32 +75,73 @@ void GetToBall()
 	}
 
 	if (IRSensors->Direction() == 11)
-		Motors->Move(25, 255);
+		Motors->Move(25, 170);
 	else if (IRSensors->Direction() == 13)
-		Motors->Move(-25, 255);
+		Motors->Move(-25, 170);
 	else
 		Motors->Move(0, 255);
+}
+
+void CameraOffset()
+{
+	if (Cam->OpposingGoal().Detected())
+	{
+		if (Cam->OpposingGoal().CenterY < (CAMERA_IMAGE_HEIGHT / 2))
+		{
+			if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) > 40)
+			{
+				Motors->SetOffset(60);
+			}
+			else if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) < -40)
+			{
+				Motors->SetOffset(-60);
+			}
+			else if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) > 10)
+			{
+				Motors->SetOffset(20);
+			}
+			else if (Cam->OpposingGoal().CenterX - (CAMERA_IMAGE_WIDTH / 2) < -10)
+			{
+				Motors->SetOffset(-20);
+			}
+			else
+			{
+				Motors->SetOffset(0);
+			}
+		}
+		else
+		{
+			if (Cam->OpposingGoal().CenterX < (CAMERA_IMAGE_WIDTH / 2))
+			{
+				Motors->SetOffset(-80);
+			}
+			else
+			{
+				Motors->SetOffset(80);
+			}
+		}
+	}
 }
 
 void Orbit()
 {
 	uint8_t ir = IRSensors->Direction();
 	if (ir >= 0 && ir <= 4)
-		Move(-137, 255);
+		Move(-137, 170);
 	else if (ir <= 23 && ir >= 19)
-		Move(137, 255);
+		Move(137, 170);
 	else if (ir >= 5 && ir <= 6)
-		Move(180, 255);
+		Move(180, 170);
 	else if (ir <= 18 && ir >= 17)
-		Move(180, 255);
+		Move(180, 170);
 	else if (ir >= 7 && ir <= 10)
-		Move(137, 255);
+		Move(137, 170);
 	else if (ir <= 16 && ir >= 14)
-		Move(-137, 255);
+		Move(-137, 170);
 	else if (ir == 11)
-		Move(90, 255);
+		Move(90, 170);
 	else if (ir == 13)
-		Move(-90, 255);
+		Move(-90, 170);
 }
 
 void Move(int16_t degree, int16_t speed)
